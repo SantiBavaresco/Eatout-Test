@@ -8,6 +8,8 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../../../firebase-config';
 import 'expo-dev-client';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -32,10 +34,14 @@ function HomeScreen() {
     const navigation = useNavigation();
 
     const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    const authF = getAuth(app);
+
+    GoogleSignin.configure({
+      webClientId: "716033457346-uiqt23knlrpkkcp12d8da9qmp4pptfja.apps.googleusercontent.com",
+    });
 
     const handleCreateAccount = () => {
-      createUserWithEmailAndPassword(auth, email, password)
+      createUserWithEmailAndPassword(authF, email, password)
       .then((userCredential) => {
         console.log('Account created!')
         Alert.alert('Account created!')
@@ -49,7 +55,7 @@ function HomeScreen() {
     }
 
     const handleSignIn = () => {
-      signInWithEmailAndPassword(auth, email, password)
+      signInWithEmailAndPassword(authF, email, password)
       .then((userCredential) => {
         console.log('Signed in!')
         const user = userCredential.user;
@@ -59,6 +65,29 @@ function HomeScreen() {
       .catch(error => {
         console.log(error)
       })
+    }
+
+    const onGoogleButtonPress = async() => {
+      // Check if your device supports Google Play
+      await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+      // Get the users ID token
+      const { idToken } = await GoogleSignin.signIn();
+    
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    
+      // Sign-in the user with the credential
+      // return auth().signInWithCredential(googleCredential);
+      const user_sing_in = auth().signInWithCredential(googleCredential);
+      user_sing_in
+        .then((user)=> {
+          console.log("user data: ", user);
+          navigation.navigate('Home');
+          
+        })
+        .catch((error)=>{
+          console.log("error >> : ", error);
+        })
     }
 
     const handleLoginGoogle = async () => {
@@ -97,7 +126,7 @@ function HomeScreen() {
               <TouchableOpacity onPress={handleCreateAccount} style={[styles.button, {backgroundColor: '#512e2e'}]}>
                 <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Create Account</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={handleLoginGoogle} style={[styles.button, {backgroundColor: '#512e2e'}]}>
+              <TouchableOpacity onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))} style={[styles.button, {backgroundColor: '#512e2e'}]}>
                 <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Google</Text>
               </TouchableOpacity>
             </View>
@@ -134,7 +163,7 @@ const styles = StyleSheet.create({
   },
   login: {
     width: 350,
-    height: 500,
+    height: 600,
     borderColor: '#fff',
     borderWidth: 2,
     borderRadius: 10,
