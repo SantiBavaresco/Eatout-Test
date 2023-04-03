@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
+import React, { useRef, useState } from 'react'
+import { NavigationContainer } from '@react-navigation/native';
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet'
+import { store } from './src/redux/store'
+import { Provider } from 'react-redux'
+
+import { LowerNavbar } from './src/components/NavBar/LowerNavBar';
+// import LowerNavBar from "../Native/src/components/NavBar/SearchBar"
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      
+      <NavigationContainer>
+        <BottomSheetModalProvider>
+          <LowerNavbar/>
+        </BottomSheetModalProvider>
+      </NavigationContainer>
+      
+    </Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
