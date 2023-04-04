@@ -16,7 +16,9 @@ import RestosList from '../Restos/RestosList.jsx'
 import ListOfFiltered from '../ListOfFiltered/ListOfFiltered.jsx'
 import Filters from '../Filters/Filters.jsx';
 import BottonSheetFilters from '../Filters/BottomSheetFilters.jsx';
-import MercadoPago from '../MercadoPago/MercadoPago.jsx';
+import MercadoPago from '../MercadoPago/MercadoPago.js';
+import MercadoPago1 from '../MercadoPago/MercadoPago.js';
+import CheckOut from '../MercaPaga/Checkout.js';
 
 // import SettingsScreen from './screens/SettingsScreen';
 
@@ -42,13 +44,17 @@ function HomeScreenStack(){
         name="Detalle Restaurant"
         component={DetailResto}
       />
-      <HomeStackNavigator.Screen
+      {/* <HomeStackNavigator.Screen
         name="MercadoPago"
         component={MercadoPago}
-      />
+      /> */}
       <HomeStackNavigator.Screen
         name="Filtrados"
         component={ListOfFiltered}
+      />
+      <HomeStackNavigator.Screen
+        name="Mapa"
+        component={Map}
       />
 
     </HomeStackNavigator.Navigator>

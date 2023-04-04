@@ -40,6 +40,7 @@ const DetailResto = ({route}) => {
     const navigation = useNavigation();
 
     function handleMercadoPago () {
+      console.log("QUIERO IR A MERCADOPAGO");
       navigation.navigate("MercadoPago")
     }
 
@@ -177,7 +178,7 @@ const DetailResto = ({route}) => {
                           name="checkmark-outline"
                           size={20}
                           color={'white'}
-                          onPress={() => handleMercadoPago()}
+                          onPress={handleMercadoPago()}
                         />
                         <Text style={{ fontFamily: "Inria-Sans-Bold", fontSize: 15, color: 'white' }}>Confimar Reserva</Text>
                       </TouchableOpacity>

@@ -24,7 +24,12 @@
         "backgroundColor": "#ffffff"
       },
       "googleServicesFile": "./google-services.json",
-      "package": "com.eatoutpf.EatOut"
+      "package": "com.eatoutpf.EatOut",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyA8wHVl7x6tJiALwmMYUL5h_l14X74f_A8"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

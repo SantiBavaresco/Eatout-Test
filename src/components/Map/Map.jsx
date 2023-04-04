@@ -62,7 +62,8 @@ return (
       {/* <MapView style={styles.map} /> */}
         <MapView
             // customMapStyle={mapStyle}            // habilitar esto para poner los colores del mapa
-            // provider={PROVIDER_GOOGLE}
+            provider={PROVIDER_GOOGLE}
+            // apiKey={"AIzaSyA8wHVl7x6tJiALwmMYUL5h_l14X74f_A8"}
             style={styles.map}
             initialRegion={{
                 latitude: -38.011083,

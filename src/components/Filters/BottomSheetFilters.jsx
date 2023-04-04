@@ -3,12 +3,14 @@ import 'react-native-gesture-handler';
 import { StyleSheet, View, Button } from 'react-native';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import Filters from "../Filters/Filters"
+import { useNavigation } from '@react-navigation/native';
 
 export default function BottonSheetFilters() {
     const bottomSheetModalRef = useRef(null)
     const [isOpen, setIsOpen] = useState(false)
     // const snapPoints = ['30%', '50%', '70%']
     const snapPoints = ['70%']
+    const navigation = useNavigation();
 
     const handlePresentModal = () => {
         bottomSheetModalRef.current?.present();
@@ -19,6 +21,9 @@ export default function BottonSheetFilters() {
         bottomSheetModalRef.current.forceClose();
     };
 
+    const handleMapDisplay = () => {
+        navigation.navigate("Mapa")
+    }
 
     {/*-------Flor*/ } 
     return (
@@ -44,6 +49,10 @@ export default function BottonSheetFilters() {
                     </View>
                 </BottomSheetModal>
 
+            <Button style={styles.itemTitle} title='Mapa' onPress={handleMapDisplay} 
+            
+            />
+
         </View>
     );
 }
@@ -51,9 +60,10 @@ export default function BottonSheetFilters() {
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
+        flexDirection: "row",
         backgroundColor: 'hsla(240, 100%, 50%, 0)',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: "space-evenly",
     },
 
     contentContainer: {
