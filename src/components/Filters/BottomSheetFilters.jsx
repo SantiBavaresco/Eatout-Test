@@ -24,12 +24,15 @@ export default function BottonSheetFilters() {
     return (
         <View style={styles.container}>
             {/* <Text>Esta al es de prueba en React Native 12.</Text> */}
-            <Button title='Filtros' onPress={handlePresentModal} />
+            <Button style={styles.itemTitle} title='Filtros' onPress={handlePresentModal} 
+            
+            />
                 <BottomSheetModal
                     ref={bottomSheetModalRef}
                     index={0}
                     snapPoints={snapPoints}
                     backgroundStyle={{ borderRadius: 50 }}
+                    backgroundOpacity={0}
                     enableDismissOnClose={true}
                     onClose={() => setIsOpen(false)}
                 >
@@ -48,7 +51,7 @@ export default function BottonSheetFilters() {
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
-        backgroundColor: 'red',
+        backgroundColor: 'hsla(240, 100%, 50%, 0)',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -63,5 +66,22 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
         fontSize: 20,
         right: 100
-    }
+    },
+    
+    itemTitle: {
+        color: '#A81337',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        width: '80%',
+        
+        padding: 10,
+        position: "absolute",
+        left: 21,
+        bottom: 5,
+        borderRadius: 20,
+        backgroundColor: "#D9D9D9"
+    
+    },
 });

@@ -15,9 +15,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import Logo from "../../img/logo-eatout.jpeg"
+import Profile from '../Profile/Profile';
 
 const uri = 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/light-salmon-abstract-low-polygon-background-aloysius-patrimonio.jpg'
-const profilePicture = 'https://avatars.githubusercontent.com/u/127988631?v=4'
+// import profilePicture from '../../img/png/eatout-logo-name.png'
 
 function HomeScreen() {
   return (
@@ -60,7 +61,7 @@ function HomeScreen() {
         console.log('Signed in!')
         const user = userCredential.user;
         console.log(user)
-        navigation.navigate('Home');
+        navigation.navigate('Inicio');
       })
       .catch(error => {
         console.log(error)
@@ -82,7 +83,7 @@ function HomeScreen() {
       user_sing_in
         .then((user)=> {
           console.log("user data: ", user);
-          navigation.navigate('Home');
+          navigation.navigate('Bienvenido', {user});
           
         })
         .catch((error)=>{
@@ -111,7 +112,10 @@ function HomeScreen() {
         }}> 
           <BlurView intensity={100}>
             <View style={styles.login}>
-              <Image source={{ uri: profilePicture }} style={styles.profilePicture} />
+            <Image 
+                style={styles.profilePicture}
+                source={require('../../img/logo-eatout.jpeg')}
+            />
               <View>
                 <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>E-mail</Text>
                 <TextInput onChangeText={(text) => setEmail(text)} style={styles.input} placeholder="usuario@mail.com" />
@@ -143,7 +147,7 @@ function HomeScreen() {
     
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Bienvenido" component={Profile} />
       </Stack.Navigator>
   );
 }
