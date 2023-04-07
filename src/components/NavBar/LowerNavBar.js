@@ -16,9 +16,9 @@ import RestosList from '../Restos/RestosList.jsx'
 import ListOfFiltered from '../ListOfFiltered/ListOfFiltered.jsx'
 import Filters from '../Filters/Filters.jsx';
 import BottonSheetFilters from '../Filters/BottomSheetFilters.jsx';
-import MercadoPago from '../MercadoPago/MercadoPago.js';
-import MercadoPago1 from '../MercadoPago/MercadoPago.js';
-import CheckOut from '../MercaPaga/Checkout.js';
+// import MercadoPago from '../MercadoPago/MercadoPago.js';
+// import MercadoPago1 from '../MercadoPago/MercadoPago.js';
+// import CheckOut from '../MercaPaga/Checkout.js';
 
 // import SettingsScreen from './screens/SettingsScreen';
 
@@ -65,8 +65,8 @@ function HomeScreenStack(){
 export const LowerNavbar = () => {
 
   return (
-    <Tab.Navigator
-      tabBarOptions={{
+    <Tab.Navigator      
+      screenOptions={({ route }) => ({
         style: {
           backgroundColor: 'red',
           borderTopWidth: 0,
@@ -78,9 +78,6 @@ export const LowerNavbar = () => {
         pressColor: 'green', 
         tabStyle: {width: 82}, 
         allowFontScaling: true, 
-      }}
-      
-      screenOptions={({ route }) => ({
         tabBarStyle: { 
             backgroundColor: "#FA6B6B",
             borderTopLeftRadius: 35,

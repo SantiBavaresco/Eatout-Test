@@ -1,87 +1,87 @@
-import * as React from 'react';
-// import Env from 'react-native-config';
-import { Appbar } from 'react-native-paper';
-import { FlatList, SafeAreaView, Alert } from 'react-native';
-import { Provider as PaperProvider } from 'react-native-paper';
-import MercadoPagoCheckout from '@blackbox-vision/react-native-mercadopago-px';
+// import * as React from 'react';
+// // import Env from 'react-native-config';
+// import { Appbar } from 'react-native-paper';
+// import { FlatList, SafeAreaView, Alert } from 'react-native';
+// import { Provider as PaperProvider } from 'react-native-paper';
+// import MercadoPagoCheckout from '@blackbox-vision/react-native-mercadopago-px';
 
-import { getProducts, getPreferenceId } from './services';
+// import { getProducts, getPreferenceId } from './services';
 
-import ProductCard from './ProductCard';
-import StatusBar from './StatusBar';
+// import ProductCard from './ProductCard';
+// import StatusBar from './StatusBar';
 
-const mercadoPagoKey = "TEST-5223583651329926-031722-a78a35cd9fecaafd7594d6d3f2d4f406-1333194536"
-const preferenceid = "1333194536-fffbf92f-3d87-4a44-950a-2b107cfa3a3b"
+// const mercadoPagoKey = "TEST-5223583651329926-031722-a78a35cd9fecaafd7594d6d3f2d4f406-1333194536"
+// const preferenceid = "1333194536-fffbf92f-3d87-4a44-950a-2b107cfa3a3b"
 
-export default function MercadoPago1() {
-  const products = getProducts();
+// export default function MercadoPago1() {
+//   const products = getProducts();
 
-  const startCheckout = async ({ title, description, amount }) => {
-    try {
-      const preferenceId = await getPreferenceId('cditoro@gmail.com', {
-        title,
-        description,
-        quantity: 1,
-        currency_id: 'ARS',
-        unit_price: amount,
-      });
+//   const startCheckout = async ({ title, description, amount }) => {
+//     try {
+//       const preferenceId = await getPreferenceId('cditoro@gmail.com', {
+//         title,
+//         description,
+//         quantity: 1,
+//         currency_id: 'ARS',
+//         unit_price: amount,
+//       });
 
-      const payment = await MercadoPagoCheckout.createPayment({
-        publicKey: mercadoPagoKey,
-        preferenceId,
-      });
+//       const payment = await MercadoPagoCheckout.createPayment({
+//         publicKey: mercadoPagoKey,
+//         preferenceId,
+//       });
 
-      if (payment.status === 'in_process') {
-        Alert.alert(
-          'Payment In Progress',
-          'You will receive an email when the payment of the product is complete'
-        );
-      } else {
-        if (payment.status === 'rejected') {
-          Alert.alert(
-            'Payment Rejected',
-            'Please retry payment. If error persists contact support'
-          );
-        }
+//       if (payment.status === 'in_process') {
+//         Alert.alert(
+//           'Payment In Progress',
+//           'You will receive an email when the payment of the product is complete'
+//         );
+//       } else {
+//         if (payment.status === 'rejected') {
+//           Alert.alert(
+//             'Payment Rejected',
+//             'Please retry payment. If error persists contact support'
+//           );
+//         }
 
-        Alert.alert(
-          'Payment succeed',
-          'You will receive an email with the invoice of your product'
-        );
-      }
-    } catch (err) {
-      if (err.message.includes('cancel')) {
-        Alert.alert(
-          'Payment was cancelled',
-          'You can keep checking out our products'
-        );
-      } else {
-        Alert.alert(
-          'Payment checkout issue',
-          'Please retry payment. If error persists contact support'
-        );
-      }
-    }
-  };
+//         Alert.alert(
+//           'Payment succeed',
+//           'You will receive an email with the invoice of your product'
+//         );
+//       }
+//     } catch (err) {
+//       if (err.message.includes('cancel')) {
+//         Alert.alert(
+//           'Payment was cancelled',
+//           'You can keep checking out our products'
+//         );
+//       } else {
+//         Alert.alert(
+//           'Payment checkout issue',
+//           'Please retry payment. If error persists contact support'
+//         );
+//       }
+//     }
+//   };
 
-  return (
-    <PaperProvider>
-      <StatusBar />
-      <SafeAreaView style={{ flex: 1 }}>
-        <Appbar>
-          <Appbar.Content title="Products" />
-        </Appbar>
-        <FlatList
-          data={products}
-          keyExtractor={(item) => `${item.id}`}
-          renderItem={({ item }) => (
-            <ProductCard {...item} onPress={startCheckout} />
-          )}
-        />
-      </SafeAreaView>
-    </PaperProvider>
-  );
-}
+//   return (
+//     <PaperProvider>
+//       <StatusBar />
+//       <SafeAreaView style={{ flex: 1 }}>
+//         <Appbar>
+//           <Appbar.Content title="Products" />
+//         </Appbar>
+//         <FlatList
+//           data={products}
+//           keyExtractor={(item) => `${item.id}`}
+//           renderItem={({ item }) => (
+//             <ProductCard {...item} onPress={startCheckout} />
+//           )}
+//         />
+//       </SafeAreaView>
+//     </PaperProvider>
+//   );
+// }
 
 
 

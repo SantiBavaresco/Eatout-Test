@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { searchRestorantById, clearStateResatorantById  } from '../../redux/actions.js'
 import { useNavigation } from '@react-navigation/native';
 import IonicIcon from 'react-native-vector-icons/Ionicons';
+import * as WebBrowser from 'expo-web-browser';
 
 import Loading from "../Loading/Loading"
 import theme from '../../styles/theme.js'
@@ -18,6 +19,13 @@ const DetailResto = ({route}) => {
     const [loading, setLoading] = useState(true)
   console.log("SOY DETAIL: ", _id);
     const dispatch = useDispatch();
+
+    const [result, setResult] = useState(null);
+    const _handlePressButtonAsync = async () => {
+      let result = await WebBrowser.openBrowserAsync("https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=1333194536-1d8d2b23-3a56-4fa7-93f8-5a52a97c05c0");
+      setResult(result);
+    };
+
 
     useEffect(() => {
         if(Object?.keys(detail)?.length === 0) { 
@@ -41,7 +49,7 @@ const DetailResto = ({route}) => {
 
     function handleMercadoPago () {
       console.log("QUIERO IR A MERCADOPAGO");
-      navigation.navigate("MercadoPago")
+      // navigation.navigate("MercadoPago")
     }
 
     return(
@@ -178,10 +186,20 @@ const DetailResto = ({route}) => {
                           name="checkmark-outline"
                           size={20}
                           color={'white'}
-                          onPress={handleMercadoPago()}
+                          onPress={() => setShowWebview(true)}
                         />
+                        {/* {showWebview && (
+                            <WebView
+                              source={{ uri: 'https://google.com' }}
+                              style={{ flex: 1 }}
+                            />
+                          )} */}
                         <Text style={{ fontFamily: "Inria-Sans-Bold", fontSize: 15, color: 'white' }}>Confimar Reserva</Text>
                       </TouchableOpacity>
+
+                      <Button title="Open WebBrowser" onPress={_handlePressButtonAsync} />
+                        <Text>{result && JSON.stringify(result)}</Text>
+
                     </View>
 
                       <Text style={styles.title}> Sobre Nosotros</Text>

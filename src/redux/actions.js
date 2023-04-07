@@ -27,7 +27,7 @@ const DB_HOST = "https://eatout.onrender.com"// ip de la pc con el server corrie
 export function getAllRestorants() {
     return async (dispatch) => {
         await axios
-            .get(`${DB_HOST}restaurant`)
+            .get(`${DB_HOST}/restaurant`)
             .then((response) => {
                 // console.log("RESPONSE -> ", response);
                 dispatch({
