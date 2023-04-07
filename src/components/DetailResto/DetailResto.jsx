@@ -20,11 +20,7 @@ const DetailResto = ({route}) => {
   console.log("SOY DETAIL: ", _id);
     const dispatch = useDispatch();
 
-    const [result, setResult] = useState(null);
-    const _handlePressButtonAsync = async () => {
-      let result = await WebBrowser.openBrowserAsync("https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=1333194536-1d8d2b23-3a56-4fa7-93f8-5a52a97c05c0");
-      setResult(result);
-    };
+
 
 
     useEffect(() => {
@@ -46,10 +42,18 @@ const DetailResto = ({route}) => {
     },[detail, loading])
 
     const navigation = useNavigation();
-
-    function handleMercadoPago () {
+    function handleCheckOut () {
       console.log("QUIERO IR A MERCADOPAGO");
-      // navigation.navigate("MercadoPago")
+      const checkout = {
+        resto: detail,
+        reserve: {
+          userId: "aaaaa", // Chequear el stado global del usuario logeado
+          cantPersons: 2,
+          cantTables: 1, // pasar la cantidad de mesas reservadas (cant de personas/2 - redondear para arriba)
+          schedule: "schedule", // la fecha y hora de la reserva
+        }
+      }
+      navigation.navigate("Checkout", checkout)
     }
 
     return(
@@ -181,12 +185,13 @@ const DetailResto = ({route}) => {
                       </View>
 
                       {/* Boton 'CONFIRMAR RESERVA' */}
-                      <TouchableOpacity style={styles.confirmButton}>
+                      <TouchableOpacity style={styles.confirmButton}
+                        onPress={()=>handleCheckOut()}>
                         <IonicIcon
                           name="checkmark-outline"
                           size={20}
                           color={'white'}
-                          onPress={() => setShowWebview(true)}
+                          
                         />
                         {/* {showWebview && (
                             <WebView
@@ -197,20 +202,21 @@ const DetailResto = ({route}) => {
                         <Text style={{ fontFamily: "Inria-Sans-Bold", fontSize: 15, color: 'white' }}>Confimar Reserva</Text>
                       </TouchableOpacity>
 
-                      <Button title="Open WebBrowser" onPress={_handlePressButtonAsync} />
-                        <Text>{result && JSON.stringify(result)}</Text>
+        
 
                     </View>
 
                       <Text style={styles.title}> Sobre Nosotros</Text>
-                      <Text style={{ paddingLeft: 20 }}>
-                        {/* {" "} */}
+                      <Text style={styles.title}> {detail?.about} </Text>
+
+                      {/* <Text style={{ paddingLeft: 20 }}>
+
                         Lorem Ipsum is simply dummy text of the printing and typesetting
                         industry. Lorem Ipsum has been the industry's standard dummy text
                         ever since the 1500s, when an unknown printer took a galley of type
                         and scrambled it to make a type specimen book. It has survived not
                         only five centuries.
-                      </Text>
+                      </Text> */}
 
                     </View>
 

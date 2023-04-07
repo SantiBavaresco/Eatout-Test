@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     title: {
-        color: 'Black',
+        color: 'black',
         fontWeight: '900',
         letterSpacing: 1,
         fontSize: 20,

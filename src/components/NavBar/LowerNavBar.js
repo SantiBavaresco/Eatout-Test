@@ -16,16 +16,18 @@ import RestosList from '../Restos/RestosList.jsx'
 import ListOfFiltered from '../ListOfFiltered/ListOfFiltered.jsx'
 import Filters from '../Filters/Filters.jsx';
 import BottonSheetFilters from '../Filters/BottomSheetFilters.jsx';
+import CheckoutPayment from '../CheckoutPayment/CheckoutPayment';
+
 // import MercadoPago from '../MercadoPago/MercadoPago.js';
 // import MercadoPago1 from '../MercadoPago/MercadoPago.js';
 // import CheckOut from '../MercaPaga/Checkout.js';
 
 // import SettingsScreen from './screens/SettingsScreen';
 
-const Tab = createBottomTabNavigator();
 
+
+// -------------------- HomeScreenStack --------------------
 const HomeStackNavigator = createNativeStackNavigator();
-
 function HomeScreenStack(){
   return(
     <HomeStackNavigator.Navigator
@@ -44,10 +46,10 @@ function HomeScreenStack(){
         name="Detalle Restaurant"
         component={DetailResto}
       />
-      {/* <HomeStackNavigator.Screen
-        name="MercadoPago"
-        component={MercadoPago}
-      /> */}
+      <HomeStackNavigator.Screen
+        name="Checkout"
+        component={CheckoutPayment}
+      />
       <HomeStackNavigator.Screen
         name="Filtrados"
         component={ListOfFiltered}
@@ -56,17 +58,26 @@ function HomeScreenStack(){
         name="Mapa"
         component={Map}
       />
+      <HomeStackNavigator.Screen
+        name="Reseñas"
+        component={HomeChiquito}   // aca va el componente Reviews
+      />
 
     </HomeStackNavigator.Navigator>
   )
 
 }
+// -------------------- HomeScreenStack --------------------
 
+
+// -------------------- Tab Navigator --------------------
+const Tab = createBottomTabNavigator();
 export const LowerNavbar = () => {
 
   return (
-    <Tab.Navigator      
-      screenOptions={({ route }) => ({
+    <Tab.Navigator    
+    //  -------------------- CSS Tab Navigator --------------------
+      tabBarOptions={{
         style: {
           backgroundColor: 'red',
           borderTopWidth: 0,
@@ -78,11 +89,33 @@ export const LowerNavbar = () => {
         pressColor: 'green', 
         tabStyle: {width: 82}, 
         allowFontScaling: true, 
-        tabBarStyle: { 
+      }}
+      screenOptions={({ route }) => ({
+        // style: {
+        //   backgroundColor: 'red',
+        //   borderTopWidth: 0,
+        // },
+        // activeTintColor: '#512e2e', 
+        // inactiveTintColor: '#efe4dc', 
+        // showIcon: false,
+        // showLabel: false, 
+        // pressColor: 'green', 
+        // tabStyle: {width: 82}, 
+        //tabBarActiveTintColor": "#512e2e",
+        tabBarInactiveTintColor: "#efe4dc",
+        tabBarAllowFontScaling: true,
+        tabBarShowLabel: false,
+        tabBarItemStyle: {
+          "width": 82
+        },        
+        tabBarStyle: [{ 
             backgroundColor: "#FA6B6B",
             borderTopLeftRadius: 35,
+            display: "flex"
             
-          },
+          },    
+          null
+        ],
         screenBackground: 'transparent',
         headerShown: false,
         headerStyle: { backgroundColor: '#FA6B6B', height: 90  },
@@ -114,7 +147,9 @@ export const LowerNavbar = () => {
         )
         
       }
-      
+    //  -------------------- CSS Tab Navigator --------------------
+
+    //  -------------------- BODY Tab Navigator --------------------      
     >
       <Tab.Screen 
           name="Inicio" 
@@ -144,8 +179,11 @@ export const LowerNavbar = () => {
       />
 
     </Tab.Navigator>
+    //  -------------------- BODY Tab Navigator --------------------      
+
   );
 };
+// -------------------- Tab Navigator --------------------
 
 
 

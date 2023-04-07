@@ -21,17 +21,25 @@ import {
 const initialState = {
     allRestorants: [],
     allRestorantsCopy: [],
+
     restorantsFound: [],
     restorantsFiltered: [],
+
     userInfo: {},
+
     restorantById: {},
     restorantByString: [],
+
+    checkoutLinkMP: "",
+
     searchText: "",
+
     typesOfFoods: [],
     typesOfSections: [],
     typesOfAtmosphere: [],
     typesOfDiet: [],
     typesOfExtras: [],
+
     orderState: "az",
 }
 
