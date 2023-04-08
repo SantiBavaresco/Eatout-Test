@@ -8,6 +8,7 @@ import {
     SET_SEARCH_TEXT,
     FILTER_CARDS,
     ORDER_CARDS,
+    GET_LINK_MERCADOPAGO,
     GET_TYPES_FOODS,
     GET_ATMOSPHERE,
     GET_SECTIONS,
@@ -88,6 +89,11 @@ export default function rootReducer(state = initialState, action) {
             return { ...state, searchText: action.payload }
         }
 //-------------------------------------------------------------------------    
+        case GET_LINK_MERCADOPAGO: {
+            //console.log("reducer: ", action.payload);
+            return { ...state, checkoutLinkMP: action.payload }
+        }
+//-------------------------------------------------------------------------   
         case FILTER_CARDS: {
             // state.filterByExtras = action.payload;
             const auxAllRestorants = [...state.allRestorants];

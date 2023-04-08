@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
 import IonicIcon from 'react-native-vector-icons/Ionicons';
 
 import { log } from 'react-native-reanimated';
